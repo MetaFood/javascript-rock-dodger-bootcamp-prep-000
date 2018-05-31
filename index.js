@@ -50,71 +50,71 @@ function createRock(x) {
     }
   }
 
-  window.requestAnimationFrame(moveRock)
+  window.requestAnimationFrame(moveRock);
 
-  ROCKS.push(rock)
+  ROCKS.push(rock);
 
-  return rock
+  return rock;
 }
 
 function endGame() {
-  clearInterval(gameInterval)
+  clearInterval(gameInterval);
 
-  ROCKS.forEach(function(rock) { rock.remove() })
+  ROCKS.forEach(function(rock) { rock.remove() });
 
-  document.removeEventListener('keydown', moveDodger)
+  document.removeEventListener('keydown', moveDodger);
 
-  START.innerHTML = 'Play again?'
-  START.style.display = 'inline'
+  START.innerHTML = 'Play again?';
+  START.style.display = 'inline';
 
-  return alert('YOU LOSE!')
+  return alert('YOU LOSE!');
 }
 
 function moveDodger(e) {
-  const code = e.which
+  const code = e.which;
 
   if ([LEFT_ARROW, RIGHT_ARROW].indexOf(code) > -1) {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   if (code === LEFT_ARROW) {
-    moveDodgerLeft()
+    moveDodgerLeft();
   } else if (code === RIGHT_ARROW) {
-    moveDodgerRight()
+    moveDodgerRight();
   }
 }
 
 function moveDodgerLeft() {
   window.requestAnimationFrame(function() {
-    const left = positionToInteger(DODGER.style.left)
+    const left = positionToInteger(DODGER.style.left);
 
     if (left > 0) {
       DODGER.style.left = `${left - 4}px`;
     }
-  })
+  });
 }
 
 function moveDodgerRight() {
   window.requestAnimationFrame(function() {
-    const left = positionToInteger(DODGER.style.left)
+    const left = positionToInteger(DODGER.style.left);
 
     if (left < 360) {
       DODGER.style.left = `${left + 4}px`;
     }
-  })
+  });
 }
 
 function positionToInteger(p) {
-  return parseInt(p.split('px')[0]) || 0
+  return parseInt(p.split('px')[0]) || 0;
 }
 
 function start() {
-  document.addEventListener('keydown', moveDodger)
+  document.addEventListener('keydown', moveDodger);
 
-  START.style.display = 'none'
+  START.style.display = 'none';
 
   gameInterval = setInterval(function() {
-    createRock(Math.floor(Math.random() *  (GAME_WIDTH - 20)))
-  }, 1000)
+    createRock(Math.floor(Math.random() *  (GAME_WIDTH - 20)));
+  }, 1000);
 }
